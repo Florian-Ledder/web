@@ -8,12 +8,17 @@
     :root {
       --bg-light: #ffffff;
       --text-light: #222222;
-      --bg-dark: #1a1a1a;
-      --text-dark: #eee;
-      --link-light: #2563eb;
-      --link-dark: #60a5fa;
-      --btn-bg-light: #e5e7eb;
-      --btn-bg-dark: #374151;
+      --bg-dark: #121212;
+      --text-dark: #e0e0e0;
+      --primary: #2563eb;
+      --primary-dark: #60a5fa;
+      --button-bg-light: #e5e7eb;
+      --button-bg-dark: #374151;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
@@ -22,12 +27,11 @@
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
       background-color: var(--bg-light);
       color: var(--text-light);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 1.5rem;
+      line-height: 1.6;
       transition: background-color 0.3s, color 0.3s;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     body.dark {
@@ -35,107 +39,244 @@
       color: var(--text-dark);
     }
 
-    main {
-      max-width: 600px;
+    header {
+      padding: 3rem 1.5rem 2rem;
       text-align: center;
+      box-shadow: 0 2px 8px var(--shadow);
+      background-color: var(--bg-light);
+      transition: background-color 0.3s;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+    body.dark header {
+      background-color: #1f1f1f;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
       font-weight: 700;
     }
 
-    p {
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+      opacity: 0.75;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    main {
+      flex-grow: 1;
+      max-width: 900px;
+      margin: 2rem auto 3rem;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 3px solid var(--primary);
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+
+    body.dark h2 {
+      border-color: var(--primary-dark);
+    }
+
+    .about p {
+      max-width: 600px;
       font-size: 1.125rem;
-      margin-bottom: 1.5rem;
-      color: inherit;
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
-    a {
-      color: var(--link-light);
+    .projects {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 600px) {
+      .projects {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .project-card {
+      background-color: var(--bg-light);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      box-shadow: 0 2px 6px var(--shadow);
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    body.dark .project-card {
+      background-color: #222;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+
+    .project-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+    }
+
+    .project-card p {
+      font-size: 0.95rem;
+      opacity: 0.75;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-card a {
+      color: var(--primary);
       text-decoration: none;
-      margin: 0 1rem;
       font-weight: 600;
-      transition: color 0.3s;
     }
 
-    body.dark a {
-      color: var(--link-dark);
+    body.dark .project-card a {
+      color: var(--primary-dark);
     }
 
-    a:hover {
+    .project-card a:hover {
       text-decoration: underline;
     }
 
-    .links {
-      margin-bottom: 2rem;
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #888;
     }
 
-    button {
-      padding: 0.5rem 1.5rem;
-      background-color: var(--btn-bg-light);
+    body.dark footer {
+      color: #aaa;
+    }
+
+    .contact-links {
+      margin: 1rem 0 0;
+    }
+
+    .contact-links a {
+      margin: 0 1rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    body.dark .contact-links a {
+      color: var(--primary-dark);
+    }
+
+    .contact-links a:hover {
+      text-decoration: underline;
+    }
+
+    button#toggleDark {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      padding: 0.6rem 1.2rem;
+      background-color: var(--button-bg-light);
       border: none;
       border-radius: 0.375rem;
       color: var(--text-light);
-      font-weight: 600;
       cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 2px 6px var(--shadow);
       transition: background-color 0.3s, color 0.3s;
+      z-index: 100;
     }
 
-    button:hover {
+    button#toggleDark:hover {
       background-color: #d1d5db;
     }
 
-    body.dark button {
-      background-color: var(--btn-bg-dark);
+    body.dark button#toggleDark {
+      background-color: var(--button-bg-dark);
       color: var(--text-dark);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.7);
     }
 
-    body.dark button:hover {
+    body.dark button#toggleDark:hover {
       background-color: #4b5563;
-    }
-
-    @media (min-width: 640px) {
-      h1 {
-        font-size: 3.5rem;
-      }
-
-      p {
-        font-size: 1.25rem;
-      }
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Flo</h1>
+    <p>Pragmatischer Entwickler. Kein Bullshit. Klare Lösungen.</p>
+  </header>
+
   <main>
-    <h1>Hi, ich bin Flo</h1>
-    <p>Ich entwickle Software, schreibe Code und baue pragmatische Lösungen. Kein Bullshit.</p>
-    <div class="links">
-      <a href="https://github.com/deinusername" target="_blank" rel="noopener">GitHub</a>
-      <a href="mailto:dein@email.de">Kontakt</a>
-    </div>
-    <button id="toggleDark">Dark Mode an/aus</button>
+    <section class="about" id="about">
+      <h2>Über mich</h2>
+      <p>
+        Ich programmiere und codiere viel, immer mit Fokus auf effiziente, wartbare und funktionale Software.
+        Meine Leidenschaft ist es, komplexe Probleme pragmatisch zu lösen.
+      </p>
+    </section>
+
+    <section class="projects" id="projects">
+      <h2>Projekte</h2>
+      <div class="projects">
+        <article class="project-card">
+          <h3><a href="https://github.com/deinusername/projekt1" target="_blank" rel="noopener">Projekt 1</a></h3>
+          <p>Eine Webapp zur Verwaltung von Aufgaben, gebaut mit React und Node.js.</p>
+        </article>
+
+        <article class="project-card">
+          <h3><a href="https://github.com/deinusername/projekt2" target="_blank" rel="noopener">Projekt 2</a></h3>
+          <p>Automatisiertes Skript zur Datenanalyse und Berichterstellung in Python.</p>
+        </article>
+
+        <article class="project-card">
+          <h3><a href="https://github.com/deinusername/projekt3" target="_blank" rel="noopener">Projekt 3</a></h3>
+          <p>Minimalistischer Blog mit statischem HTML und CSS, optimiert für Geschwindigkeit.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <h2>Kontakt</h2>
+      <p>Schreib mir eine Mail oder schau dir meine Profile an:</p>
+      <div class="contact-links">
+        <a href="mailto:dein@email.de">Mail</a>
+        <a href="https://github.com/deinusername" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/deinusername" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </section>
   </main>
 
+  <footer>
+    &copy; 2025 Flo – All rights reserved.
+  </footer>
+
+  <button id="toggleDark" aria-label="Dark Mode umschalten">Dark Mode an/aus</button>
+
   <script>
-    const toggle = document.getElementById("toggleDark");
+    const btn = document.getElementById('toggleDark');
     const body = document.body;
 
-    // Dark Mode laden
-    if (localStorage.getItem("theme") === "dark" || 
-       (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-      body.classList.add("dark");
+    // Dark Mode initial setzen (lokaler Speicher oder Systempräferenz)
+    if(localStorage.getItem('theme') === 'dark' || 
+       (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      body.classList.add('dark');
     }
 
-    toggle.addEventListener("click", () => {
-      if (body.classList.contains("dark")) {
-        body.classList.remove("dark");
-        localStorage.setItem("theme", "light");
+    btn.addEventListener('click', () => {
+      if(body.classList.contains('dark')) {
+        body.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
       } else {
-        body.classList.add("dark");
-        localStorage.setItem("theme", "dark");
+        body.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
       }
     });
   </script>
